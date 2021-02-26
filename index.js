@@ -14,7 +14,7 @@ module.exports = {
     const baseUrl = inputs.baseUrl || WEBMENTION_BASE_URL || URL;
     const feedUrl = `${baseUrl.replace(/\$/, "")}/${feedPath}`;
 
-    if (CONTEXT !== "production") {
+    if (constants.IS_LOCAL || CONTEXT !== "production") {
       console.log(
         "Skipping discovering webmentions because this isn't a production build"
       );
