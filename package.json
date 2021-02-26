@@ -1,0 +1,26 @@
+{
+  "name": "netlify-plugin-webmentions",
+  "version": "1.0.0",
+  "description": "Automatically discover any webmentions and send them after every production build",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeFoodPixels/netlify-plugin-webmentions.git"
+  },
+  "author": "Luke Bonaccorsi",
+  "license": "MIT",
+  "keywords": [
+    "netlify",
+    "netlify-plugin"
+  ],
+  "bugs": {
+    "url": "https://github.com/CodeFoodPixels/netlify-plugin-webmentions/issues"
+  },
+  "homepage": "https://github.com/CodeFoodPixels/netlify-plugin-webmentions#readme",
+  "dependencies": {
+    "@remy/webmention": "^1.4.5"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
