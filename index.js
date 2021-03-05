@@ -21,33 +21,37 @@ module.exports = {
       return;
     }
 
-    await new Promise((resolve, reject) => {
-      console.log(
-        `Discovering Webmentions in ${feedUrl} with a limit of ${limit} ${
-          limit === 1 ? "entry" : "entries"
-        }`
-      );
-      console.log("");
-
-      const wm = new Webmention({ limit, send: true });
-
-      wm.on("error", (e) => utils.build.failPlugin(e));
-
-      wm.on("sent", (res) => {
+    try {
+      await new Promise((resolve, reject) => {
         console.log(
-          `Sent ${res.source} to ${res.endpoint.url} (${res.endpoint.type})`
+          `Discovering Webmentions in ${feedUrl} with a limit of ${limit} ${
+            limit === 1 ? "entry" : "entries"
+          }`
         );
-        if (res.error) {
-          console.log(`Error sending to ${res.endpoint.url}: ${res.error}`);
-        }
         console.log("");
-      });
 
-      wm.on("end", () => {
-        resolve();
-      });
+        const wm = new Webmention({ limit, send: true });
 
-      wm.fetch(feedUrl);
-    });
+        wm.on("error", (e) => reject(e));
+
+        wm.on("sent", (res) => {
+          console.log(
+            `Sent ${res.source} to ${res.endpoint.url} (${res.endpoint.type})`
+          );
+          if (res.error) {
+            console.log(`Error sending to ${res.endpoint.url}: ${res.error}`);
+          }
+          console.log("");
+        });
+
+        wm.on("end", () => {
+          resolve();
+        });
+
+        wm.fetch(feedUrl);
+      });
+    } catch (e) {
+      utils.build.failPlugin(e);
+    }
   },
 };
