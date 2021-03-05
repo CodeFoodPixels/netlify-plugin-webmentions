@@ -2,7 +2,6 @@ name: netlify-plugin-webmentions
 inputs:
   - name: baseUrl
     description: The base url of your site
-    default: 
   - name: feedPath
     description: "Path to your site's feed, without a leading slash (Default: feed.xml)"
   - name: limit
